@@ -49,10 +49,15 @@ public class MainWindow extends JFrame {
 	
 	// Выводит новое окно с количеством вхождений каждого слова и скачивает указанную страницу в html-файл
 	private void getResultWindow(String website) {
-		HTMLParser.download("https://" + website);
-		HTMLParser.parse("Download.html");
-		ArrayList <String> wordList = TextAnalyzer.analyzeText("Download-Words.txt");
-		new ConsoleWindow(wordList);
+		Downloader.download("https://" + website);
+		Parser.parse("Download.html");
+		// Не уверен нужен ли здесь этот список, т.к. логику лучше держать отдельно от GUI
+		// И вообще вызов этих методов как осуществить?
+		// Надо переделать HTMLParser в загрузчик страниц в html, а Analyzer в парсер - т.е. он будет и слова искать, и находить их количество
+		ArrayList <String> wordList = Parser.analyzeText("Download-Words.txt");
+		if (Downloader.isValid()) {
+			new ConsoleWindow(wordList);
+		}
 	}
 	
 }
