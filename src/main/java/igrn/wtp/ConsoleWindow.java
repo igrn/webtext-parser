@@ -1,7 +1,7 @@
 package igrn.wtp;
 
 import java.awt.*;
-import java.util.ArrayList;
+import java.util.HashMap;
 import javax.swing.*;
 
 public class ConsoleWindow extends JFrame {
@@ -27,30 +27,13 @@ public class ConsoleWindow extends JFrame {
 	}
 	
 	// Конструктор для вывода окна консоли с результами поиска слов
-	public ConsoleWindow(ArrayList <String> wordsList) {
+	public ConsoleWindow(HashMap<String, Integer> wordsList) {
 		this();
-		setTitle("Найденные слова");
-		for (int i = 0 ; i < wordsList.size(); i++) {
-			write(wordsList.get(i));
+		setTitle("Найденные слова");	
+		for(String word: wordsList.keySet()) {
+			console.append(word + " - " + wordsList.get(word));
+			console.append("\n");
 		}
 	}
-
-	// Конструктор для вывода логов с ошибками
-	// ЕСТЬ 2 ПРОБЛЕМЫ - Как сделать так чтобы все ошибки записывались в 1 окно (список не подойдет? добавить 2-й параметр??)
-	// И Как избавиться от лишних пустых окошек
-	public ConsoleWindow(String errorMessage) {
-		this();
-		setTitle("Возникла ошибка");
-		write("При выполнении программы возникли следующие ошибки:");
-		write(errorMessage);
-	}
-	
-	//Нужен метод записи строк в консоль write()
-	//Возможно нужен метод проверки успешности выполнения программы validate() или checkErrors() только не в этом классе
-	
-	public void write(String line) {
-		console.append(line);
-		console.append("\n");
-	}
-	
+		
 }

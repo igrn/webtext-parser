@@ -1,10 +1,8 @@
 package igrn.wtp;
 
-import java.awt.*;
+import java.awt.Font;
 import java.awt.event.*;
-import java.util.ArrayList;
 import java.util.regex.Pattern;
-
 import javax.swing.*;
 
 public class MainWindow extends JFrame {
@@ -17,7 +15,7 @@ public class MainWindow extends JFrame {
 	
 	public MainWindow() {
 		super("Введите URL");
-		// Создание текстого поля, заголовка и кнопки
+		// Настройка текстого поля, заголовка и кнопки
 		textbar.setFont(new Font("Dialog", Font.PLAIN, 16));
 		textbar.setToolTipText("Введите адрес сайта в формате www.example.com");
 		label.setFont(new Font("Dialog", Font.PLAIN, 16));
@@ -25,7 +23,7 @@ public class MainWindow extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (Pattern.matches(urlRegex, textbar.getText())) {
-					getResultWindow(textbar.getText());
+					showResultWindow(textbar.getText());
 				} else {
 					JOptionPane.showMessageDialog(new JFrame(), "Адрес страницы введен неверно!", "Ошибка", JOptionPane.ERROR_MESSAGE);
 				}
@@ -48,16 +46,9 @@ public class MainWindow extends JFrame {
 	}
 	
 	// Выводит новое окно с количеством вхождений каждого слова и скачивает указанную страницу в html-файл
-	private void getResultWindow(String website) {
-		Downloader.download("https://" + website);
-		Parser.parse("Download.html");
-		// Не уверен нужен ли здесь этот список, т.к. логику лучше держать отдельно от GUI
-		// И вообще вызов этих методов как осуществить?
-		// Надо переделать HTMLParser в загрузчик страниц в html, а Analyzer в парсер - т.е. он будет и слова искать, и находить их количество
-		ArrayList <String> wordList = Parser.analyzeText("Download-Words.txt");
-		if (Downloader.isValid()) {
-			new ConsoleWindow(wordList);
-		}
+	private void showResultWindow(String website) {
+		Downloader.savetoHtml("https://" + website);
+		Parser.analyzeText(Parser.parseHtml("index.html"));
 	}
 	
 }
