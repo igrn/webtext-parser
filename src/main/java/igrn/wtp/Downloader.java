@@ -9,7 +9,7 @@ import org.jsoup.nodes.Document;
 public class Downloader {
 	
 	// Скачивает указанную страницу в html-файл
-	public static void savetoHtml(String website) {
+	public static void saveToHtml(String website) {
 		try {
 			Document doc = Jsoup.connect(website)
 								.userAgent("Mozilla/5.0")

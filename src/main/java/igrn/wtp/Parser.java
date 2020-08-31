@@ -9,17 +9,17 @@ import org.jsoup.select.Elements;
 
 public class Parser {
 	
-	// Парсит указанный html-файл в текстовую строку
-	public static String parseHtml(String htmlFile) {
-		String text = "";
+	// Выдает строку со всем тектом, содержащимся в теле указанного html-файла
+	public static String findText(String htmlFile) {
+		String parsedHtml = "";
 		try {
-			Document doc = Jsoup.parse(new File(htmlFile), "UTF-8");
-			Elements tags = doc.body().select("*");
+			Element htmlBody = Jsoup.parse(new File(htmlFile), "UTF-8").body();
+			Elements tags = htmlBody.select("*");
 			for (Element tag : tags) {
 				for (TextNode tn : tag.textNodes()) { //textNode делит вложенные теги на отдельные словосочетания
 					String tagText = tn.text().trim();
 					if (tagText.length() > 0) {
-						text += tagText + " ";
+						parsedHtml += tagText + " ";
 					}
 				}
 			}
@@ -27,28 +27,28 @@ public class Parser {
 		// Исключения	
 		} catch (FileNotFoundException e) {
 			System.err.println("FileNotFoundException: " + e.getMessage());
+			// аппенднуть к строке сообщение и как-то скипнуть следующий метод
 		} catch (IOException e) {
 			System.err.println("IOException: " + e.getMessage());
 		}
-		return text;
+		return parsedHtml;
 	}
 	
 	// Возвращает словарь типа "Найденное слово - Количество вхождений"
-	public static void analyzeText(String text) {
-		HashMap<String, Integer> wordsList = new HashMap<String, Integer>();
-				
-		// Делим строку на отдельные слова
-		for (String word : text.split("[ ,.!?\";:\n\r\t]")) {
+	public static void getWordFrequency(String parsedHtml) {
+		HashMap<String, Integer> foundWords = new HashMap<String, Integer>();
+		for (String word : parsedHtml.split("[ ,.!?\";:\n\r\t]")) { // Делим строку на отдельные слова
 			word = word.toUpperCase();
-			if (Pattern.matches("[A-ZА-Я]([A-ZА-Я0-9-]*?)", word)) {
-				if (!wordsList.containsKey(word)) { // Добавляем новые слова в список, у старых увеличиваем количество вхождений
-					wordsList.put(word, 1);
+			if (Pattern.matches("[A-ZА-Я]([A-ZА-Я0-9-]*?)", word)) { // Пропускаем числа, отдельные символы (напр. ©)
+				if (foundWords.containsKey(word)) {
+					int frequency = foundWords.get(word);
+					foundWords.put(word, frequency++);
 				} else {
-					wordsList.put(word, wordsList.get(word) + 1);
+					foundWords.put(word, 1);
 				}
 			}
 		}
-		new ConsoleWindow(wordsList); // Вывод результата в консоль
+		new ConsoleWindow(foundWords); // Вывод результата в консоль
 	}
 	
 }

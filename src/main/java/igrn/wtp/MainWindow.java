@@ -47,8 +47,9 @@ public class MainWindow extends JFrame {
 	
 	// Выводит новое окно с количеством вхождений каждого слова и скачивает указанную страницу в html-файл
 	private void showResultWindow(String website) {
-		Downloader.savetoHtml("https://" + website);
-		Parser.analyzeText(Parser.parseHtml("index.html"));
+		Downloader.saveToHtml("https://" + website);
+		String parsedHtml = Parser.findText("index.html");
+		Parser.getWordFrequency(parsedHtml);
 	}
 	
 }

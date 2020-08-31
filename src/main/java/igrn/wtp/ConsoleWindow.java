@@ -27,11 +27,11 @@ public class ConsoleWindow extends JFrame {
 	}
 	
 	// Конструктор для вывода окна консоли с результами поиска слов
-	public ConsoleWindow(HashMap<String, Integer> wordsList) {
+	public ConsoleWindow(HashMap<String, Integer> foundWords) {
 		this();
 		setTitle("Найденные слова");	
-		for(String word: wordsList.keySet()) {
-			console.append(word + " - " + wordsList.get(word));
+		for(String word: foundWords.keySet()) {
+			console.append(word + " - " + foundWords.get(word));
 			console.append("\n");
 		}
 	}
