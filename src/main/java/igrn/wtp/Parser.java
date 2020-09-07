@@ -8,7 +8,6 @@ import org.jsoup.nodes.*;
 import org.jsoup.select.Elements;
 
 public class Parser {
-	
 	// Выдает строку со всем тектом, содержащимся в теле указанного html-файла
 	public static String findText(String htmlFile) {
 		String parsedHtml = "";
@@ -23,7 +22,6 @@ public class Parser {
 					}
 				}
 			}
-		
 		// Исключения	
 		} catch (FileNotFoundException e) {
 			System.err.println("FileNotFoundException: " + e.getMessage());
@@ -41,8 +39,7 @@ public class Parser {
 			word = word.toUpperCase();
 			if (Pattern.matches("[A-ZА-Я]([A-ZА-Я0-9-]*?)", word)) { // Пропускаем числа, отдельные символы (напр. ©)
 				if (foundWords.containsKey(word)) {
-					int frequency = foundWords.get(word);
-					foundWords.put(word, frequency++);
+					foundWords.put(word, foundWords.get(word) + 1);
 				} else {
 					foundWords.put(word, 1);
 				}
@@ -50,5 +47,4 @@ public class Parser {
 		}
 		new ConsoleWindow(foundWords); // Вывод результата в консоль
 	}
-	
 }

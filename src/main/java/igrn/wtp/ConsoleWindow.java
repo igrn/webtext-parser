@@ -5,7 +5,6 @@ import java.util.HashMap;
 import javax.swing.*;
 
 public class ConsoleWindow extends JFrame {
-	
 	private JTextArea console = new JTextArea();
 	private JPanel contents = new JPanel();
 	
@@ -35,5 +34,4 @@ public class ConsoleWindow extends JFrame {
 			console.append("\n");
 		}
 	}
-		
 }

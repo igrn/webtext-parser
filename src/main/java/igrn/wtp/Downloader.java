@@ -7,7 +7,6 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
 public class Downloader {
-	
 	// Скачивает указанную страницу в html-файл
 	public static void saveToHtml(String website) {
 		try {
@@ -19,7 +18,6 @@ public class Downloader {
 								.parse();
 			
 			FileUtils.writeStringToFile(new File("index.html"), doc.outerHtml(), "UTF-8");
-			
 		// Исключения
 		} catch (MalformedURLException e) {
 			System.err.println("MalformedURLException: " + e.getMessage());
@@ -29,5 +27,4 @@ public class Downloader {
 			System.err.println("IOException: " + e.getMessage());
 		} 
 	}
-	
 }
