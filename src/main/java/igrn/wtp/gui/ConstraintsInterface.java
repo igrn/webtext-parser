@@ -1,17 +1,96 @@
 package igrn.wtp.gui;
 
+import java.awt.GridBagConstraints;
+import java.awt.Insets;
+
 interface ConstraintsInterface {	
+	GridBagConstraints constraints = new GridBagConstraints();
 	
-	void setGridPos(int column, int row);
+	void setConstraints();
 	
-	void setGridSize(int numberOfColumns, int numberOfRows);
+	GridBagConstraints getConstraints();
 	
-	void setWeight(double weightx, double weighty);
+	default void resetConstraintsToDefault() {
+		setGridPos(0, 0);
+		setGridSize(1, 1);
+		setWeight(0.0, 0.0);
+		setPadding(0, 0, 0, 0);
+		setAnchor(Alignment.CENTER);
+		setFillMode(FillMode.NONE);
+		adjustMinSize(0, 0);
+	}
+	
+	default void setGridPos(int column, int row) {
+		constraints.gridx = column;
+		constraints.gridy = row;
+	}
+	
+	default void setGridSize(int numberOfColumns, int numberOfRows) {
+		constraints.gridwidth = numberOfColumns;
+		constraints.gridheight = numberOfRows;
+	}
+	
+	default void setWeight(double weightx, double weighty) {
+		constraints.weightx = weightx;
+		constraints.weighty = weighty;
+	}
 		
-	void setPadding(int top, int left, int bottom, int right);
+	default void setPadding(int top, int left, int bottom, int right) {
+		constraints.insets = new Insets(top, left, bottom, right);
+	}
 	
-	void setAnchor(Alignment alignment);
+	default void setAnchor(Alignment alignment) {
+		switch (alignment) {
+			case TOP:
+				constraints.anchor = GridBagConstraints.NONE;
+				break;
+			case BOTTOM:
+				constraints.anchor = GridBagConstraints.SOUTH;
+				break;
+			case LEFT:
+				constraints.anchor = GridBagConstraints.WEST;
+				break;
+			case RIGHT:
+				constraints.anchor = GridBagConstraints.EAST;
+				break;
+			case TOPLEFT:
+				constraints.anchor = GridBagConstraints.NORTHWEST;
+				break;
+			case TOPRIGHT:
+				constraints.anchor = GridBagConstraints.NORTHEAST;
+				break;
+			case BOTTOMLEFT:
+				constraints.anchor = GridBagConstraints.SOUTHWEST;
+				break;
+			case BOTTOMRIGHT:
+				constraints.anchor = GridBagConstraints.SOUTHEAST;
+				break;
+			case CENTER:
+				constraints.anchor = GridBagConstraints.CENTER;
+				break;
+		}
+	}
 	
-	void adjustMinSize(int width, int height);
+	default public void setFillMode(FillMode mode) {
+		switch (mode) {
+			case HORIZONTAL:
+				constraints.fill = GridBagConstraints.HORIZONTAL;
+				break;
+			case VERTICAL:
+				constraints.fill = GridBagConstraints.VERTICAL;
+				break;
+			case BOTH:
+				constraints.fill = GridBagConstraints.BOTH;
+				break;
+			case NONE:
+				constraints.fill = GridBagConstraints.NONE;
+				break;
+		}
+	}
+	
+	default void adjustMinSize(int width, int height) {
+		constraints.ipadx = width;
+		constraints.ipady = height;
+	}
 	
 }

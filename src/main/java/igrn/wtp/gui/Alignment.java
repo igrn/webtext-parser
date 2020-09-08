@@ -8,5 +8,6 @@ public enum Alignment {
 	TOPLEFT,
 	TOPRIGHT,
 	BOTTOMLEFT,
-	BOTTOMRIGHT
+	BOTTOMRIGHT,
+	CENTER
 }

@@ -46,12 +46,12 @@ public class MainWindow extends JFrame {
 		contents.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contents.setLayout(new GridBagLayout());
 		
-		contents.add(descLabel, descLabel.constraints);
-		contents.add(httpBox, httpBox.constraints);
-		contents.add(httpField, httpField.constraints);
-		contents.add(okButton, okButton.constraints);
-		contents.add(openFileLabel, openFileLabel.constraints);
-		contents.add(saveCheckBox, saveCheckBox.constraints);
+		contents.add(descLabel, descLabel.getConstraints());
+		contents.add(httpBox, httpBox.getConstraints());
+		contents.add(httpField, httpField.getConstraints());
+		contents.add(okButton, okButton.getConstraints());
+		contents.add(openFileLabel, openFileLabel.getConstraints());
+		contents.add(saveCheckBox, saveCheckBox.getConstraints());
 	}
 	
 	// Надписи в окне
@@ -64,12 +64,14 @@ public class MainWindow extends JFrame {
 		descLabel.setWeight(0.0, 1.0);
 		descLabel.setPadding(0, 0, 20, 0);
 		descLabel.setAnchor(Alignment.BOTTOM);
+		descLabel.setConstraints();
 		
 		// Открывает диалоговое окно для открытия файла *.html
 		openFileLabel = new GridBagLabel("<HTML>или <U>Открыть файл</U></HTML>");
 		openFileLabel.setGridPos(0, 2);
 		openFileLabel.setGridSize(3, 1);
 		openFileLabel.setPadding(10, 0, 0, 0);
+		openFileLabel.setConstraints();
 	}
 	
 	// Выпадающий список с выбором https или http
@@ -78,6 +80,7 @@ public class MainWindow extends JFrame {
 		httpBox.setModel(new DefaultComboBoxModel<String>(new String[] {"https://", "http://"}));
 		httpBox.setGridPos(0, 1);
 		httpBox.adjustMinSize(-5, 0);
+		httpBox.setConstraints();
 		httpBox.setFocusable(false);
 	}
 	
@@ -89,6 +92,7 @@ public class MainWindow extends JFrame {
 		httpField.setGridPos(1, 1);
 		httpField.setWeight(1.0, 0.0);
 		httpField.setCaretPosition(0);
+		httpField.setConstraints();
 	}
 	
 	// Кнопка "OK"
@@ -97,6 +101,7 @@ public class MainWindow extends JFrame {
 		okButton.setGridPos(2, 1);
 		okButton.setPadding(0, 5, 0, 0);
 		okButton.adjustMinSize(5, 0);
+		okButton.setConstraints();
 		okButton.setFocusable(false);
 	}
 	
@@ -107,7 +112,8 @@ public class MainWindow extends JFrame {
 		saveCheckBox.setGridSize(3, 1);
 		saveCheckBox.setWeight(0.0, 1.0);
 		saveCheckBox.setAnchor(Alignment.BOTTOMLEFT);
-		saveCheckBox.setFocusable(false);	
+		saveCheckBox.setFocusable(false);
+		saveCheckBox.setConstraints();
 	}
 	
 	// Обрабатывает все возникающие события
