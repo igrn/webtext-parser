@@ -12,6 +12,6 @@ interface ConstraintsInterface {
 	
 	void setAnchor(Alignment alignment);
 	
-	void modifyMinSize(int width, int height);
+	void adjustMinSize(int width, int height);
 	
 }

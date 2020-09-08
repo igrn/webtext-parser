@@ -69,7 +69,7 @@ public class GridBagButton extends JButton implements ConstraintsInterface {
 	}
 	
 	@Override
-	public void modifyMinSize(int width, int height) {
+	public void adjustMinSize(int width, int height) {
 		constraints.ipadx = width;
 		constraints.ipady = height;
 	}
