@@ -9,8 +9,8 @@ public class ConsoleWindow extends JFrame {
 	private JPanel contents = new JPanel();
 	
 	// Базовый конструктор этого класса
-	public ConsoleWindow() {
-		super();
+	public ConsoleWindow(String text) {
+		super(text);
 		console.setFont(new Font("Consolas", Font.PLAIN, 14));
 		console.setBackground(Color.BLACK);
 		console.setForeground(Color.WHITE);
@@ -23,12 +23,14 @@ public class ConsoleWindow extends JFrame {
 		setSize(800, 500);
 		setLocationRelativeTo(null);
 		setVisible(true);
+		
+		setSize(801, 500); // фикс белой линии справа
+		setSize(800, 500);
 	}
 	
 	// Конструктор для вывода окна консоли с результами поиска слов
 	public ConsoleWindow(HashMap<String, Integer> foundWords) {
-		this();
-		setTitle("Найденные слова");	
+		this("Найденные слова");
 		for(String word: foundWords.keySet()) {
 			console.append(word + " - " + foundWords.get(word));
 			console.append("\n");

@@ -7,24 +7,37 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
 public class Downloader {
-	// Скачивает указанную страницу в html-файл
-	public static void saveToHtml(String website) {
+	private static Document bufferedWebpage;
+	
+	// Сохраняет указанную страницу в буфер для последующей обработки парсером
+	public static Document saveToBuffer(String website) {
 		try {
-			Document doc = Jsoup.connect(website)
-								.userAgent("Mozilla/5.0")
-								.timeout(3000)
-								.maxBodySize(0)
-								.execute()
-								.parse();
-			
-			FileUtils.writeStringToFile(new File("index.html"), doc.outerHtml(), "UTF-8");
+			bufferedWebpage = Jsoup.connect(website)
+								   .userAgent("Mozilla/5.0")
+								   .timeout(3000)
+								   .maxBodySize(0)
+								   .execute()
+								   .parse();
+			return bufferedWebpage;
 		// Исключения
 		} catch (MalformedURLException e) {
 			System.err.println("MalformedURLException: " + e.getMessage());
+			return null;
 		} catch (SocketTimeoutException e) {
 			System.err.println("SocketTimeoutException: " + e.getMessage());
+			return null;
 		} catch (IOException e) {
 			System.err.println("IOException: " + e.getMessage());
-		} 
+			return null;
+		}
+	}
+	
+	// Сохраняет удержанную в буфере страницу в html-файл
+	public static void saveToHtml(String name) {
+		try {
+			FileUtils.writeStringToFile(new File(name + ".html"), bufferedWebpage.outerHtml(), "UTF-8");
+		} catch (IOException e) {
+			System.err.println("IOException: " + e.getMessage());
+		}
 	}
 }

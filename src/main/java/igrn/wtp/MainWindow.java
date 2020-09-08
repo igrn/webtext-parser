@@ -19,14 +19,17 @@ public class MainWindow extends JFrame {
 	public MainWindow() {
 		super("Webtext Parser");
 		createGUI();
-		addListeners();
 		
 		// Настройки окна
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setLocationRelativeTo(null);
 		setMinimumSize(new Dimension(450, 300));
+		setLocationRelativeTo(null);
 		setContentPane(contents);
 		setVisible(true);
+		setSize(451, 300); // фикс белой линии справа окна в Windows
+		setSize(450, 300); // возможно, это связано с ошибкой при округлении
+		
+		addListeners();
 	}
 	
 	// Собирает весь интерфейс окна в одну панель
@@ -112,8 +115,8 @@ public class MainWindow extends JFrame {
 		saveCheckBox.setGridSize(3, 1);
 		saveCheckBox.setWeight(0.0, 1.0);
 		saveCheckBox.setAnchor(Alignment.BOTTOMLEFT);
-		saveCheckBox.setFocusable(false);
 		saveCheckBox.setConstraints();
+		saveCheckBox.setFocusable(false);
 	}
 	
 	// Обрабатывает все возникающие события
@@ -181,8 +184,8 @@ public class MainWindow extends JFrame {
 	
 	// Выводит новое окно с количеством вхождений каждого слова и скачивает указанную страницу в html-файл
 	private void showResultWindow(String website) {
-		Downloader.saveToHtml(website);
-		String parsedHtml = Parser.findText("index.html");
+		String parsedHtml = Parser.findText(Downloader.saveToBuffer(website));
+		Downloader.saveToHtml(httpField.getText()); // тут можно более понятный код сделать
 		Parser.getWordFrequency(parsedHtml);
 	}
 }

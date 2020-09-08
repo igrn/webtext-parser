@@ -1,7 +1,6 @@
 package igrn.wtp.gui;
 
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
+import java.awt.*;
 
 interface ConstraintsInterface {	
 	GridBagConstraints constraints = new GridBagConstraints();
@@ -42,7 +41,7 @@ interface ConstraintsInterface {
 	default void setAnchor(Alignment alignment) {
 		switch (alignment) {
 			case TOP:
-				constraints.anchor = GridBagConstraints.NONE;
+				constraints.anchor = GridBagConstraints.NORTH;
 				break;
 			case BOTTOM:
 				constraints.anchor = GridBagConstraints.SOUTH;
@@ -92,5 +91,4 @@ interface ConstraintsInterface {
 		constraints.ipadx = width;
 		constraints.ipady = height;
 	}
-	
 }

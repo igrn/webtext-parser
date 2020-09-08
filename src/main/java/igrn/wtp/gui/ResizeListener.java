@@ -1,9 +1,7 @@
 package igrn.wtp.gui;
 
-
 import java.awt.Component;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
+import java.awt.event.*;
 
 public class ResizeListener extends ComponentAdapter {
 	private final Component component;
@@ -24,5 +22,4 @@ public class ResizeListener extends ComponentAdapter {
 			component.setSize(Math.max(width, this.width), Math.max(height, this.height));
 		}
 	}
-	
 }
