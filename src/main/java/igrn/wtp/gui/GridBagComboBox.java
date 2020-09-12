@@ -14,7 +14,7 @@ public class GridBagComboBox<E> extends JComboBox<E> implements ConstraintsInter
 	@Override
 	public void setConstraints() {
 		constraints = (GridBagConstraints) ConstraintsInterface.constraints.clone();
-		resetConstraintsToDefault();
+		restoreDefaultConstraints();
 	}
 	
 	@Override

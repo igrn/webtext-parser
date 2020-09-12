@@ -18,14 +18,11 @@ public class ConsoleWindow extends JFrame {
 		contents.setLayout(new BoxLayout(contents, BoxLayout.Y_AXIS));
 		contents.add(new JScrollPane(console));
 		
+		setContentPane(contents);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		add(contents);
 		setSize(800, 500);
 		setLocationRelativeTo(null);
 		setVisible(true);
-		
-		setSize(801, 500); // фикс белой линии справа
-		setSize(800, 500);
 	}
 	
 	// Конструктор для вывода окна консоли с результами поиска слов

@@ -6,10 +6,6 @@ import javax.swing.JCheckBox;
 public class GridBagCheckBox extends JCheckBox implements ConstraintsInterface {
 	private GridBagConstraints constraints;
 	
-	public GridBagCheckBox() {
-		super();
-	}
-	
 	public GridBagCheckBox(String text) {
 		super(text);
 		setFont(new Font("Segoe UI", Font.PLAIN, 14));
@@ -20,7 +16,7 @@ public class GridBagCheckBox extends JCheckBox implements ConstraintsInterface {
 	@Override
 	public void setConstraints() {
 		constraints = (GridBagConstraints) ConstraintsInterface.constraints.clone();
-		resetConstraintsToDefault();
+		restoreDefaultConstraints();
 	}
 	
 	@Override

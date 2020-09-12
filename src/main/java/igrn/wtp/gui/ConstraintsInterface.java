@@ -9,7 +9,7 @@ interface ConstraintsInterface {
 	
 	GridBagConstraints getConstraints();
 	
-	default void resetConstraintsToDefault() {
+	default void restoreDefaultConstraints() {
 		setGridPos(0, 0);
 		setGridSize(1, 1);
 		setWeight(0.0, 0.0);

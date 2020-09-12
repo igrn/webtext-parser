@@ -6,10 +6,6 @@ import javax.swing.JTextField;
 public class GridBagTextField extends JTextField implements ConstraintsInterface {
 	private GridBagConstraints constraints;
 	
-	public GridBagTextField() {
-		super();
-	}
-	
 	public GridBagTextField(String text) {
 		super(text);
 		setFont(new Font("Segoe UI", Font.PLAIN, 14));
@@ -18,7 +14,7 @@ public class GridBagTextField extends JTextField implements ConstraintsInterface
 	@Override
 	public void setConstraints() {
 		constraints = (GridBagConstraints) ConstraintsInterface.constraints.clone();
-		resetConstraintsToDefault();
+		restoreDefaultConstraints();
 	}
 	
 	@Override

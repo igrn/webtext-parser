@@ -1,8 +1,6 @@
 package igrn.wtp;
 
 import java.awt.*;
-import java.awt.event.*;
-import java.util.regex.Pattern;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import igrn.wtp.gui.*;
@@ -13,36 +11,31 @@ public class MainWindow extends JFrame {
 	private GridBagComboBox<String> httpBox;
 	private GridBagTextField httpField;
 	private GridBagButton okButton;
-	private GridBagLabel openFileLabel;
+	private GridBagButton openFileButton;
 	private GridBagCheckBox saveCheckBox;
 	
 	public MainWindow() {
 		super("Webtext Parser");
 		createGUI();
-		
-		// Настройки окна
+		setContentPane(contents);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setMinimumSize(new Dimension(450, 300));
 		setLocationRelativeTo(null);
-		setContentPane(contents);
-		setVisible(true);
-		setSize(451, 300); // фикс белой линии справа окна в Windows
-		setSize(450, 300); // возможно, это связано с ошибкой при округлении
-		
+		setVisible(true);	
 		addListeners();
 	}
 	
 	// Собирает весь интерфейс окна в одну панель
 	private void createGUI() {
-		addLabels();
+		addLabel();
 		addComboBox();
 		addTextField();
-		addButton();
+		addButtons();
 		addCheckBox();
 		addElementsToPanel();
 	}
 	
-	// Добавление элементов окна на панель
+	// Создание и настройка панели
 	private void addElementsToPanel() {
 		contents = new JPanel();
 		contents.setBackground(new Color(44, 49, 53));
@@ -53,13 +46,12 @@ public class MainWindow extends JFrame {
 		contents.add(httpBox, httpBox.getConstraints());
 		contents.add(httpField, httpField.getConstraints());
 		contents.add(okButton, okButton.getConstraints());
-		contents.add(openFileLabel, openFileLabel.getConstraints());
+		contents.add(openFileButton, openFileButton.getConstraints());
 		contents.add(saveCheckBox, saveCheckBox.getConstraints());
 	}
 	
-	// Надписи в окне
-	private void addLabels() {
-		// Верхняя надпись
+	// Верхняя надпись
+	private void addLabel() {
 		descLabel = new GridBagLabel("Введите название сайта, чтобы продолжить:");
 		descLabel.setFont(new Font("Segoe UI", Font.BOLD, 16));
 		descLabel.setGridPos(0, 0);
@@ -68,13 +60,6 @@ public class MainWindow extends JFrame {
 		descLabel.setPadding(0, 0, 20, 0);
 		descLabel.setAnchor(Alignment.BOTTOM);
 		descLabel.setConstraints();
-		
-		// Открывает диалоговое окно для открытия файла *.html
-		openFileLabel = new GridBagLabel("<HTML>или <U>Открыть файл</U></HTML>");
-		openFileLabel.setGridPos(0, 2);
-		openFileLabel.setGridSize(3, 1);
-		openFileLabel.setPadding(10, 0, 0, 0);
-		openFileLabel.setConstraints();
 	}
 	
 	// Выпадающий список с выбором https или http
@@ -90,22 +75,32 @@ public class MainWindow extends JFrame {
 	// Текстовое поле для ввода адреса сайта
 	private void addTextField() {
 		httpField = new GridBagTextField("www.example.com");
-		httpField.setForeground(Color.GRAY);
-		httpField.setFillMode(FillMode.HORIZONTAL);
 		httpField.setGridPos(1, 1);
 		httpField.setWeight(1.0, 0.0);
-		httpField.setCaretPosition(0);
+		httpField.setFillMode(FillMode.HORIZONTAL);
 		httpField.setConstraints();
+		httpField.setCaretPosition(0);
 	}
 	
-	// Кнопка "OK"
-	private void addButton() {
+	private void addButtons() {
+		// Кнопка "OK"
 		okButton = new GridBagButton("OK");		
 		okButton.setGridPos(2, 1);
 		okButton.setPadding(0, 5, 0, 0);
 		okButton.adjustMinSize(5, 0);
 		okButton.setConstraints();
 		okButton.setFocusable(false);
+		
+		// Открывает диалоговое окно для открытия файла *.html
+		openFileButton = new GridBagButton("<HTML>или <U>Открыть файл</U></HTML>");
+		openFileButton.setForeground(Color.WHITE);
+		openFileButton.setBackground(new Color(44, 49, 53));
+		openFileButton.setGridPos(0, 2);
+		openFileButton.setGridSize(3, 1);
+		openFileButton.setPadding(5, 0, 0, 0);
+		openFileButton.setConstraints();
+		openFileButton.setFocusPainted(false);
+		openFileButton.setContentAreaFilled(false);
 	}
 	
 	// Опция сохранения обработанного сайта в файл имя-сайта.html
@@ -116,76 +111,16 @@ public class MainWindow extends JFrame {
 		saveCheckBox.setWeight(0.0, 1.0);
 		saveCheckBox.setAnchor(Alignment.BOTTOMLEFT);
 		saveCheckBox.setConstraints();
-		saveCheckBox.setFocusable(false);
+		saveCheckBox.setFocusPainted(false);
 	}
 	
 	// Обрабатывает все возникающие события
 	private void addListeners() {
-		addComponentListener(new ResizeListener(this));
-		
-		okButton.addActionListener(new ActionListener() {
-			private static final String urlRegex = "[a-zA-Z_0-9\\-]+(\\.\\w[a-zA-Z_0-9\\-]+)+(/[#&\\n\\-=?\\+\\%/\\.\\w]+)?";
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				if (Pattern.matches(urlRegex, httpField.getText())) {
-					showResultWindow(httpBox.getSelectedItem() + httpField.getText());
-				} else if (httpField.getText().isEmpty()) {
-					JOptionPane.showMessageDialog(new JFrame(), "Пустая строка!", "Сообщение", JOptionPane.INFORMATION_MESSAGE);
-				} else {
-					JOptionPane.showMessageDialog(new JFrame(), "Адрес страницы введен неверно!", "Ошибка", JOptionPane.ERROR_MESSAGE);					
-				}
-			}
-		});
-		
-		httpField.addActionListener(new ActionListener() {
-			private static final String urlRegex = "[a-zA-Z_0-9\\-]+(\\.\\w[a-zA-Z_0-9\\-]+)+(/[#&\\n\\-=?\\+\\%/\\.\\w]+)?";
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				if (Pattern.matches(urlRegex, httpField.getText())) {
-					showResultWindow(httpBox.getSelectedItem() + httpField.getText());
-				} else if (httpField.getText().isEmpty()) {
-					JOptionPane.showMessageDialog(new JFrame(), "Пустая строка!", "Сообщение", JOptionPane.INFORMATION_MESSAGE);
-				} else {
-					JOptionPane.showMessageDialog(new JFrame(), "Адрес страницы введен неверно!", "Ошибка", JOptionPane.ERROR_MESSAGE);					
-				}
-			}
-		});
-		
-		// Добавляет подсказку для ввода в текстовое поле
-		httpField.addFocusListener(new FocusListener() {
-			private boolean isShowingHint = true;
-			
-			@Override
-			public void focusGained(FocusEvent e) {
-				if (isShowingHint) {
-					httpField.setText("");
-					isShowingHint = false;
-				}
-				httpField.setForeground(Color.BLACK);
-				httpField.setBackground(Color.WHITE);
-			}
-
-			@Override
-			public void focusLost(FocusEvent e) {
-				if (httpField.getText().isEmpty()) {
-					httpField.setText("www.example.com");
-					httpField.setForeground(Color.GRAY);
-					isShowingHint = true;
-				} else {
-					httpField.setForeground(Color.DARK_GRAY);
-				}
-				httpField.setBackground(Color.LIGHT_GRAY);
-				httpField.setCaretPosition(httpField.getText().length());
-			}
-		});
-	}
-	
-	// Выводит новое окно с количеством вхождений каждого слова и скачивает указанную страницу в html-файл
-	private void showResultWindow(String website) {
-		String parsedHtml = Parser.findText(Downloader.saveToBuffer(website));
-		Downloader.saveToHtml(httpField.getText()); // тут можно более понятный код сделать
-		Parser.getWordFrequency(parsedHtml);
+		addComponentListener(new ResizeListener(this)); // исправляет баг swing с дисплеями hidpi
+		SearchListener searchListener = new SearchListener(httpBox, httpField, saveCheckBox); // выполняет поиск слов по заданному адресу
+		okButton.addActionListener(searchListener);
+		httpField.addActionListener(searchListener);
+		httpField.addFocusListener(new HintListener(httpField, "www.example.com")); // добавляет подсказку в поле ввода
+		openFileButton.addActionListener(new OpenFileListener(this)); // открывает диалог выбора файла
 	}
 }

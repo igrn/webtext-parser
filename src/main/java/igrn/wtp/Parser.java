@@ -6,7 +6,7 @@ import org.jsoup.nodes.*;
 import org.jsoup.select.Elements;
 
 public class Parser {
-	// Выдает строку со всем тектом, содержащимся в теле указанного web-страницы
+	// Выдает строку со всем тектом, содержащимся в теле кода указанной web-страницы
 	public static String findText(Document html) {
 		String parsedHtml = "";
 		Element htmlBody = html.body();
