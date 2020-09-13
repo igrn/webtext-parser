@@ -1,18 +1,18 @@
 package igrn.wtp;
 
+import java.awt.Component;
 import java.awt.event.*;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
-
 import org.jsoup.nodes.Document;
 
 
 public class OpenFileListener implements ActionListener {
-	private MainWindow frame;
+	private Component parentFrame;
 	
-	public OpenFileListener(MainWindow frame) {
+	public OpenFileListener(Component parentFrame) {
 		super();
-		this.frame = frame;
+		this.parentFrame = parentFrame;
 	}
 	
 	@Override
@@ -21,8 +21,7 @@ public class OpenFileListener implements ActionListener {
 		fileChooser.setDialogTitle("Выберите файл");
 		fileChooser.setFileFilter(new FileNameExtensionFilter("Веб-страница (*.htm; *.html)", "htm", "html"));
 		fileChooser.setAcceptAllFileFilterUsed(false);
-//		fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
-		int result = fileChooser.showOpenDialog(frame);
+		int result = fileChooser.showOpenDialog(parentFrame);
 		if (result == JFileChooser.APPROVE_OPTION) {
 			Document openedHtmlFile = FileManager.openHtmlFile(fileChooser.getSelectedFile());
 			String parsedHtml = Parser.findText(openedHtmlFile);

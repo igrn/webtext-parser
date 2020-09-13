@@ -92,9 +92,7 @@ public class MainWindow extends JFrame {
 		okButton.setFocusable(false);
 		
 		// Открывает диалоговое окно для открытия файла *.html
-		openFileButton = new GridBagButton("<HTML>или <U>Открыть файл</U></HTML>");
-		openFileButton.setForeground(Color.WHITE);
-		openFileButton.setBackground(new Color(44, 49, 53));
+		openFileButton = new GridBagButton("<html><font color='ffffff'>или <u>Открыть файл</u></font></html>");
 		openFileButton.setGridPos(0, 2);
 		openFileButton.setGridSize(3, 1);
 		openFileButton.setPadding(5, 0, 0, 0);
@@ -116,11 +114,13 @@ public class MainWindow extends JFrame {
 	
 	// Обрабатывает все возникающие события
 	private void addListeners() {
-		addComponentListener(new ResizeListener(this)); // исправляет баг swing с дисплеями hidpi
 		SearchListener searchListener = new SearchListener(httpBox, httpField, saveCheckBox); // выполняет поиск слов по заданному адресу
 		okButton.addActionListener(searchListener);
 		httpField.addActionListener(searchListener);
-		httpField.addFocusListener(new HintListener(httpField, "www.example.com")); // добавляет подсказку в поле ввода
 		openFileButton.addActionListener(new OpenFileListener(this)); // открывает диалог выбора файла
+		
+		addComponentListener(new ResizeListener(this)); // исправляет баг swing с дисплеями hidpi
+		httpField.addFocusListener(new HintListener(httpField, "www.example.com")); // добавляет подсказку в поле ввода
+		openFileButton.getModel().addChangeListener(new HighlightListener(openFileButton));
 	}
 }
