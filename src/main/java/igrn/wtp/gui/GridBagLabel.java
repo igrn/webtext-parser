@@ -1,6 +1,8 @@
 package igrn.wtp.gui;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.GridBagConstraints;
 import javax.swing.JLabel;
 
 public class GridBagLabel extends JLabel implements ConstraintsInterface {

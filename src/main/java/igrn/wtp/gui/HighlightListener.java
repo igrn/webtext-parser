@@ -7,7 +7,6 @@ import javax.swing.event.ChangeListener;
 public class HighlightListener implements ChangeListener {
 	JButton button;
 	
-	
 	public HighlightListener(JButton button) {
 		super();
 		this.button = button;
@@ -21,5 +20,4 @@ public class HighlightListener implements ChangeListener {
 			button.setText("<html><font color='ffffff'>или <u>Открыть файл</u></font></html>");
 		}
 	}
-
 }

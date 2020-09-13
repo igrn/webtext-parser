@@ -1,7 +1,8 @@
 package igrn.wtp.gui;
 
 import java.awt.Component;
-import java.awt.event.*;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 
 // Вспомогательный класс-слушатель, отвечающий за изменение размера JFrame при попытке его уменьшения меньше указанного минимума в методе setMinimumSize
 // Частично фиксит баг Swing, когда setMinimumSize игнорирует настройки скейлинга интерфейса в Windows (для hidpi-дисплеев, у меня как раз такой)

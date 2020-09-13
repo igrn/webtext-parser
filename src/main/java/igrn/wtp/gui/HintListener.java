@@ -1,7 +1,8 @@
 package igrn.wtp.gui;
 
 import java.awt.Color;
-import java.awt.event.*;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import javax.swing.JTextField;
 
 // Вспомогательный класс-слушатель, добавляющий подсказку для ввода в текстовое поле, когда оно пустое и не в фокусе

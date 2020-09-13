@@ -1,6 +1,7 @@
 package igrn.wtp.gui;
 
-import java.awt.*;
+import java.awt.GridBagConstraints;
+import java.awt.Insets;
 
 interface ConstraintsInterface {	
 	GridBagConstraints constraints = new GridBagConstraints();

@@ -3,7 +3,6 @@ package igrn.wtp;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-
 import org.apache.commons.io.FileUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;

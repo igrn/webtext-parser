@@ -1,8 +1,11 @@
 package igrn.wtp;
 
-import java.io.*;
-import java.net.*;
-import org.jsoup.*;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.SocketTimeoutException;
+import org.jsoup.HttpStatusException;
+import org.jsoup.Jsoup;
+import org.jsoup.UnsupportedMimeTypeException;
 import org.jsoup.nodes.Document;
 
 public class Connector {

@@ -1,6 +1,8 @@
 package igrn.wtp.gui;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.GridBagConstraints;
 import javax.swing.JCheckBox;
 
 public class GridBagCheckBox extends JCheckBox implements ConstraintsInterface {

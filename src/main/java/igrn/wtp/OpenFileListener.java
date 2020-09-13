@@ -1,11 +1,11 @@
 package igrn.wtp;
 
 import java.awt.Component;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import org.jsoup.nodes.Document;
-
 
 public class OpenFileListener implements ActionListener {
 	private Component parentFrame;

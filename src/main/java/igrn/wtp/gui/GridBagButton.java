@@ -1,6 +1,7 @@
 package igrn.wtp.gui;
 
-import java.awt.*;
+import java.awt.Font;
+import java.awt.GridBagConstraints;
 import javax.swing.JButton;
 
 public class GridBagButton extends JButton implements ConstraintsInterface {

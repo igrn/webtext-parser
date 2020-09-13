@@ -1,6 +1,7 @@
 package igrn.wtp.gui;
 
-import java.awt.*;
+import java.awt.Font;
+import java.awt.GridBagConstraints;
 import javax.swing.JComboBox;
 
 public class GridBagComboBox<E> extends JComboBox<E> implements ConstraintsInterface{

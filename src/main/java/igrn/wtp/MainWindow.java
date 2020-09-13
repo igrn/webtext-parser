@@ -1,9 +1,15 @@
 package igrn.wtp;
 
-import java.awt.*;
-import javax.swing.*;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.GridBagLayout;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import igrn.wtp.gui.*;
+
 
 public class MainWindow extends JFrame {
 	private JPanel contents;
