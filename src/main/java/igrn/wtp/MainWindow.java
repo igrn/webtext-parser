@@ -125,7 +125,7 @@ public class MainWindow extends JFrame {
 		httpField.addActionListener(searchListener);
 		openFileButton.addActionListener(new OpenFileListener(this)); // открывает диалог выбора файла
 		
-		addComponentListener(new ResizeListener(this)); // исправляет баг swing с дисплеями hidpi
+		//addComponentListener(new ResizeListener(this)); // исправляет баг swing с дисплеями hidpi на Windows
 		httpField.addFocusListener(new HintListener(httpField, "www.example.com")); // добавляет подсказку в поле ввода
 		openFileButton.getModel().addChangeListener(new HighlightListener(openFileButton));
 	}
